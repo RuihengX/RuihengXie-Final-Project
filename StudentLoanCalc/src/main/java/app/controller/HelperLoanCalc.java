@@ -75,6 +75,56 @@ public class HelperLoanCalc {
 		while(PPMT + AdditionalPayment < pv) {
 			double PMT = CalculatePMT();
 			pv -= PPMT + AdditionalPayment;
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			PPMT = PMT - CalculateInterest(pv);
 			interest += PMT-PPMT;
 			System.out.println(PPMT+AdditionalPayment);
