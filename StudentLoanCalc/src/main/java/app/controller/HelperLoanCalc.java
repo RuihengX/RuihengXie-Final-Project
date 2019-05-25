@@ -9,6 +9,7 @@ public class HelperLoanCalc {
 	private int NbrOfYears;
 	private double InterestRate;
 	
+	
 	public HelperLoanCalc(double LoanAmount, double InterestRate, int NbrOfYears, double AdditionalPayment) {
 		this.LoanAmount = LoanAmount;
 		this.InterestRate = InterestRate;
@@ -73,8 +74,8 @@ public class HelperLoanCalc {
 		
 		while(PPMT + AdditionalPayment < pv) {
 			double PMT = CalculatePMT();
-			PPMT = PMT - CalculateInterest(pv);
 			pv -= PPMT + AdditionalPayment;
+			PPMT = PMT - CalculateInterest(pv);
 			interest += PMT-PPMT;
 			System.out.println(PPMT+AdditionalPayment);
 		}
