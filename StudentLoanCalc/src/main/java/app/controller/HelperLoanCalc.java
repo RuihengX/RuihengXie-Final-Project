@@ -2,30 +2,25 @@ package app.controller;
 
 import org.apache.poi.ss.formula.functions.FinanceLib;
 
+
 public class HelperLoanCalc {
 	
 	private double LoanAmount;
+	
 	private double AdditionalPayment;
+	
 	private int NbrOfYears;
+	
 	private double InterestRate;
 	
-	
-	public HelperLoanCalc(double LoanAmount, double InterestRate, int NbrOfYears, double AdditionalPayment) {
+	public HelperLoanCalc(double LoanAmount, double AdditionalPayment, int NbrOfYears, double InterestRate) {
 		this.LoanAmount = LoanAmount;
-		this.InterestRate = InterestRate;
-		this.NbrOfYears = NbrOfYears;
 		this.AdditionalPayment = AdditionalPayment;
-		
+		this.NbrOfYears = NbrOfYears;
+		this.InterestRate = InterestRate;
 	}
 
-	public double getLoanAmount() {
-		return LoanAmount;
-	}
-
-	public void setLoanAmount(double loanAmount) {
-		LoanAmount = loanAmount;
-	}
-
+	
 	public double getAdditionalPayment() {
 		return AdditionalPayment;
 	}
@@ -34,12 +29,12 @@ public class HelperLoanCalc {
 		AdditionalPayment = additionalPayment;
 	}
 
-	public int getNbrOfYears() {
+	public double getNbrOfYears() {
 		return NbrOfYears;
 	}
 
-	public void setNbrOfYears(int nbrOfYears) {
-		NbrOfYears = nbrOfYears;
+	public void setNbrOfYears(int d) {
+		NbrOfYears = d;
 	}
 
 	public double getInterestRate() {
@@ -50,12 +45,16 @@ public class HelperLoanCalc {
 		InterestRate = interestRate;
 	}
 
+	public void setLoanAmount(double loanAmount) {
+		LoanAmount = loanAmount;
+	}
+	
+		
 	public double CalculateInterest(double amount) {
 		double rate = InterestRate/12;
 		double interest = amount*rate;
 		return interest;
 	}
-	
 	public double CalculatePMT() {
 		double r = InterestRate/12;
 		double n = NbrOfYears*12;
@@ -68,19 +67,14 @@ public class HelperLoanCalc {
 	}
 	
 	public double CalculateTotalPayment() {
-		
 		double interest = 0;
 		double PPMT = 0;
 		double pv = LoanAmount;
 		
 		while(PPMT + AdditionalPayment < pv) {
-			
 			double PMT = CalculatePMT();
-			
-			pv -= AdditionalPayment + PPMT;	
-			
 			PPMT = PMT - CalculateInterest(pv);
-		    
+			pv -= PPMT + AdditionalPayment;
 			interest += PMT-PPMT;
 			System.out.println(PPMT+AdditionalPayment);
 		}
